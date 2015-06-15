@@ -16,7 +16,7 @@
 	var/currentfloor = null
 	var/floor = null
 	/var/global/liftposition = 1
-	/var/global/ismoving = 1
+	/var/global/ismoving = 0
 
 /datum/file/program/lift/interact()
 	currentfloor = computer.z
@@ -56,7 +56,8 @@
 			var/area/start_location = null
 			var/area/end_location = null
 			if (computer.z == 7)
-				usr << "You are already on the top floor"
+				usr << "You are already on the top floor."
+				ismoving=0
 				return
 			if (computer.z == 8)
 				start_location = locate(/area/lift/lower)
@@ -118,6 +119,7 @@
 
 			if (computer.z == 8)
 				usr << "You are already on the bottom floor."
+				ismoving=0
 				return
 			if (computer.z == 1)
 				start_location = locate(/area/lift/ground)
